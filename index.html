@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!--pizza_order_total.html:
+same form plus the <script> block with logics and calculation, onsubmit="return getTotal()", and the #result div-->
+
+<meta charset="UTF-8">
+<title>Pizza Order With Total</title>
+
+</head>
+
+<!-- Page centered using text-align on body -->
+<body style="font-family:Arial, sans-serif; margin:20px; background-color:#f4f4f4; text-align:center;">
+
+<h1 style="color:#f39c12;">Online Pizza Order Express</h1>
+
+<!-- ===== FORM DESIGN (Rubric: Day 1, 10 pts) ===== -->
+<!-- Uses <form>, <input>, <select>, <textarea>, radio, checkbox as required -->
+<form style="background-color:white; padding:20px; border-radius:8px; max-width:400px; margin:0 auto; text-align:left; box-shadow:0 0 8px rgba(0,0,0,0.1); border-top:4px solid #f39c12;" onsubmit="return getTotal()">
+
+    <!-- Customer Info: all required -->
+    <h2 style="color:#e67e22;">Customer Info</h2>
+    Name: <input type="text" id="name" style="width:100%; padding:8px;" required><br><br>
+    Contact Number: <input type="text" id="contact" style="width:100%; padding:8px;" required><br><br>
+    Email: <input type="email" id="email" style="width:100%; padding:8px;" required>
+
+    <!-- Pizza Selection: dropdown -->
+    <h2 style="color:#e67e22;">Pizza Selection</h2>
+   <select id="pizza" style="width:100%; padding:8px;">
+    <option value="250">Pepperoni - ₱250</option>
+    <option value="230">Hawaiian - ₱230</option>
+    <option value="220">Veggie - ₱220</option>
+    <option value="280">Meat Lovers - ₱280</option>
+   </select>
+    <!-- Quantity: number input, min/max validation -->
+    <h2 style="color:#e67e22;">Quantity (1-10)</h2>
+    <input type="number" id="qty" min="1" max="10" value="1" style="width:100%; padding:8px;">
+
+    <!-- Add-ons: checkboxes, more than one can be picked -->
+    <h2 style="color:#e67e22;">Add-ons</h2>
+    <input type="checkbox" id="cheese" value="30" style="accent-color:#f39c12;"> Extra Cheese - ₱30<br>
+    <input type="checkbox" id="pineapple" value="20" style="accent-color:#f39c12;"> Extra Pineapple - ₱20<br>
+    <input type="checkbox" id="mushroom" value="30" style="accent-color:#f39c12;"> Extra Mushroom - ₱30<br>
+    <input type="checkbox" id="pepperoni" value="40" style="accent-color:#f39c12;"> Extra Pepperoni - ₱40
+
+    <!-- Payment Method: radio buttons, only one can be picked -->
+    <h2 style="color:#e67e22;">Payment Method</h2>
+    <input type="radio" name="payment" id="payment1" required style="accent-color:#f39c12;"> Cash on Delivery<br>
+    <input type="radio" name="payment" id="payment2" style="accent-color:#f39c12;"> GCash<br>
+    <input type="radio" name="payment" id="payment3" style="accent-color:#f39c12;"> Credit Card
+
+    <!-- Delivery Address: textarea -->
+    <h2 style="color:#e67e22;">Delivery Address</h2>
+    <textarea id="address" style="width:100%; padding:8px;" required></textarea>
+
+    <br><br>
+    <input type="submit" value="Place Order" style="background-color:#f39c12; color:white; padding:10px 15px; border:none; border-radius:4px; width:100%; cursor:pointer; font-weight:bold;">
+
+</form>
+
+<!-- ===== TOTAL OUTPUT DISPLAY ===== -->
+
+<!-- Empty until JS fills it in with innerHTML -->
+<div id="result" style="max-width:400px; margin:20px auto; padding:0;"></div>
+
+<!-- ===== COMPUTATION LOGIC (Rubric: Day 2, 10 pts) ===== -->
+<script>
+
+function getTotal() {
+
+  // Get the Name and Contact Number values
+  var name = document.getElementById("name").value;
+  var contact = document.getElementById("contact").value;
+
+  // Check Name has no numbers, using isNaN() to test each character
+  for (var i = 0; i < name.length; i++) {
+    if (!isNaN(name.charAt(i)) && name.charAt(i) !== " ") {
+      alert("Name must not contain numbers");
+      return false;
+    }
+  }
+  
+  <!-- standard Philippine Contact Number Format-->
+
+  // Check Contact Number is exactly 11 digits
+  if (contact.length !== 11) {
+    alert("Contact number must be exactly 11 digits");
+    return false;
+  }
+
+  // Check Contact Number starts with 09
+  if (contact.charAt(0) !== "0" || contact.charAt(1) !== "9") {
+    alert("Contact number must start with 09");
+    return false;
+  }
+
+  // Get pizza price and quantity
+  var pizzaPrice = document.getElementById("pizza").value;
+  var qty = document.getElementById("qty").value;
+
+  // Compute Add-ons total (supports multiple add-ons at once)
+  var addons = 0;
+
+  if (document.getElementById("cheese").checked) {
+    addons = addons + 30;
+  }
+  if (document.getElementById("pineapple").checked) {
+    addons = addons + 20;
+  }
+  if (document.getElementById("mushroom").checked) {
+    addons = addons + 30;
+  }
+  if (document.getElementById("pepperoni").checked) {
+    addons = addons + 40;
+  }
+
+  // Final formula: (PizzaPrice x Quantity) + Sum of Add-ons
+  var total = (pizzaPrice * qty) + addons;
+
+  // Display the result below the form, styled as a highlighted box
+  document.getElementById("result").innerHTML =
+    "<div style='background-color:#2ecc71; color:white; padding:15px; border-radius:8px; font-size:20px; font-weight:bold;'>Your total amount is ₱" + total + "</div>";
+
+  // stops the form from submitting/reloading the page, so the total stays visible
+  return false;
+
+}
+
+</script>
+
+</body>
+</html>

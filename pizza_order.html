@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!--pizza_order.html:
+just the form. No <script>, no onsubmit. Submit button does nothing special yet.-->
+
+<meta charset="UTF-8">
+<title>Pizza Order</title>
+
+</head>
+
+<!-- Page centered using text-align on body -->
+<body style="font-family:Arial, sans-serif; margin:20px; background-color:#f4f4f4; text-align:center;">
+
+<h1 style="color:#f39c12;">Online Pizza Order Express</h1>
+
+<!-- ===== FORM DESIGN (Rubric: Day 1, 10 pts) ===== -->
+<!-- Uses <form>, <input>, <select>, <textarea>, radio, checkbox as required -->
+<form style="background-color:white; padding:20px; border-radius:8px; max-width:400px; margin:0 auto; text-align:left; box-shadow:0 0 8px rgba(0,0,0,0.1); border-top:4px solid #f39c12;">
+
+    <!-- Customer Info: all required -->
+    <h2 style="color:#e67e22;">Customer Info</h2>
+    Name: <input type="text" id="name" style="width:100%; padding:8px;" required><br><br>
+    Contact Number: <input type="text" id="contact" style="width:100%; padding:8px;" required><br><br>
+    Email: <input type="email" id="email" style="width:100%; padding:8px;" required>
+
+    <!-- Pizza Selection: dropdown -->
+    <h2 style="color:#e67e22;">Pizza Selection</h2>
+   <select id="pizza" style="width:100%; padding:8px;">
+    <option value="250">Pepperoni - ₱250</option>
+    <option value="230">Hawaiian - ₱230</option>
+    <option value="220">Veggie - ₱220</option>
+    <option value="280">Meat Lovers - ₱280</option>
+   </select>
+    <!-- Quantity: number input, min/max validation -->
+    <h2 style="color:#e67e22;">Quantity (1-10)</h2>
+    <input type="number" id="qty" min="1" max="10" value="1" style="width:100%; padding:8px;">
+
+    <!-- Add-ons: checkboxes, more than one can be picked -->
+    <h2 style="color:#e67e22;">Add-ons</h2>
+    <input type="checkbox" id="cheese" value="30" style="accent-color:#f39c12;"> Extra Cheese - ₱30<br>
+    <input type="checkbox" id="pineapple" value="20" style="accent-color:#f39c12;"> Extra Pineapple - ₱20<br>
+    <input type="checkbox" id="mushroom" value="30" style="accent-color:#f39c12;"> Extra Mushroom - ₱30<br>
+    <input type="checkbox" id="pepperoni" value="40" style="accent-color:#f39c12;"> Extra Pepperoni - ₱40
+
+    <!-- Payment Method: radio buttons, only one can be picked -->
+    <h2 style="color:#e67e22;">Payment Method</h2>
+    <input type="radio" name="payment" id="payment1" required style="accent-color:#f39c12;"> Cash on Delivery<br>
+    <input type="radio" name="payment" id="payment2" style="accent-color:#f39c12;"> GCash<br>
+    <input type="radio" name="payment" id="payment3" style="accent-color:#f39c12;"> Credit Card
+
+    <!-- Delivery Address: textarea -->
+    <h2 style="color:#e67e22;">Delivery Address</h2>
+    <textarea id="address" style="width:100%; padding:8px;" required></textarea>
+
+    <br><br>
+    <input type="submit" value="Place Order" style="background-color:#f39c12; color:white; padding:10px 15px; border:none; border-radius:4px; width:100%; cursor:pointer; font-weight:bold;">
+
+</form>
+
+</body>
+</html>
